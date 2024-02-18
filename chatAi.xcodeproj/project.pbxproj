@@ -10,6 +10,27 @@
 		182F36E02B7F233D001394FB /* SignUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 182F36DF2B7F233D001394FB /* SignUp.swift */; };
 		182F36E22B7F24BC001394FB /* AuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 182F36E12B7F24BC001394FB /* AuthManager.swift */; };
 		187327432B7F9D2500668F3C /* AvatarTopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 187327422B7F9D2500668F3C /* AvatarTopView.swift */; };
+		187327452B8046F600668F3C /* ChatHistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 187327442B8046F600668F3C /* ChatHistoryView.swift */; };
+		187327472B80627E00668F3C /* AvatarListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 187327462B80627E00668F3C /* AvatarListView.swift */; };
+		187327492B8062E500668F3C /* AudioManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 187327482B8062E500668F3C /* AudioManager.swift */; };
+		187327552B8063C600668F3C /* レベルアップ回復.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 1873274A2B8063C500668F3C /* レベルアップ回復.mp3 */; };
+		187327562B8063C600668F3C /* カウントダウン.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 1873274B2B8063C500668F3C /* カウントダウン.mp3 */; };
+		187327572B8063C600668F3C /* ガチャる.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 1873274C2B8063C500668F3C /* ガチャる.mp3 */; };
+		187327582B8063C600668F3C /* ホームに戻る.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 1873274D2B8063C500668F3C /* ホームに戻る.mp3 */; };
+		187327592B8063C600668F3C /* キャンセル.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 1873274E2B8063C500668F3C /* キャンセル.mp3 */; };
+		1873275A2B8063C600668F3C /* 敵攻撃.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 1873274F2B8063C500668F3C /* 敵攻撃.mp3 */; };
+		1873275B2B8063C600668F3C /* 倒した.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 187327502B8063C500668F3C /* 倒した.mp3 */; };
+		1873275C2B8063C600668F3C /* 味方攻撃.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 187327512B8063C500668F3C /* 味方攻撃.mp3 */; };
+		1873275D2B8063C600668F3C /* 正解.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 187327522B8063C500668F3C /* 正解.mp3 */; };
+		1873275E2B8063C600668F3C /* 不正解.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 187327532B8063C500668F3C /* 不正解.mp3 */; };
+		1873275F2B8063C600668F3C /* おとも切り替え.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 187327542B8063C500668F3C /* おとも切り替え.mp3 */; };
+		187327612B8065B100668F3C /* AVKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 187327602B8065B100668F3C /* AVKit.framework */; };
+		1896FEF72B80AC0E00A5977F /* BackGroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1896FEF62B80AC0E00A5977F /* BackGroundView.swift */; };
+		1896FEF92B80CBCA00A5977F /* TopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1896FEF82B80CBCA00A5977F /* TopView.swift */; };
+		1896FEFB2B80CC8E00A5977F /* SettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1896FEFA2B80CC8E00A5977F /* SettingView.swift */; };
+		1896FEFE2B80CCF800A5977F /* TermsOfServiceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1896FEFC2B80CCF800A5977F /* TermsOfServiceView.swift */; };
+		1896FEFF2B80CCF800A5977F /* PrivacyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1896FEFD2B80CCF800A5977F /* PrivacyView.swift */; };
+		1896FF012B81B37C00A5977F /* ManagerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1896FF002B81B37C00A5977F /* ManagerView.swift */; };
 		18EFB8492B7E4872008AC2B8 /* chatAiApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18EFB8482B7E4872008AC2B8 /* chatAiApp.swift */; };
 		18EFB84B2B7E4872008AC2B8 /* ChatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18EFB84A2B7E4872008AC2B8 /* ChatView.swift */; };
 		18EFB84D2B7E4874008AC2B8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 18EFB84C2B7E4874008AC2B8 /* Assets.xcassets */; };
@@ -48,6 +69,27 @@
 		182F36DF2B7F233D001394FB /* SignUp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUp.swift; sourceTree = "<group>"; };
 		182F36E12B7F24BC001394FB /* AuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthManager.swift; sourceTree = "<group>"; };
 		187327422B7F9D2500668F3C /* AvatarTopView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatarTopView.swift; sourceTree = "<group>"; };
+		187327442B8046F600668F3C /* ChatHistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatHistoryView.swift; sourceTree = "<group>"; };
+		187327462B80627E00668F3C /* AvatarListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatarListView.swift; sourceTree = "<group>"; };
+		187327482B8062E500668F3C /* AudioManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioManager.swift; sourceTree = "<group>"; };
+		1873274A2B8063C500668F3C /* レベルアップ回復.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "レベルアップ回復.mp3"; path = "../../itQuiz 音声/レベルアップ回復.mp3"; sourceTree = "<group>"; };
+		1873274B2B8063C500668F3C /* カウントダウン.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "カウントダウン.mp3"; path = "../../itQuiz 音声/カウントダウン.mp3"; sourceTree = "<group>"; };
+		1873274C2B8063C500668F3C /* ガチャる.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "ガチャる.mp3"; path = "../../itQuiz 音声/ガチャる.mp3"; sourceTree = "<group>"; };
+		1873274D2B8063C500668F3C /* ホームに戻る.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "ホームに戻る.mp3"; path = "../../itQuiz 音声/ホームに戻る.mp3"; sourceTree = "<group>"; };
+		1873274E2B8063C500668F3C /* キャンセル.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "キャンセル.mp3"; path = "../../itQuiz 音声/キャンセル.mp3"; sourceTree = "<group>"; };
+		1873274F2B8063C500668F3C /* 敵攻撃.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "敵攻撃.mp3"; path = "../../itQuiz 音声/敵攻撃.mp3"; sourceTree = "<group>"; };
+		187327502B8063C500668F3C /* 倒した.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "倒した.mp3"; path = "../../itQuiz 音声/倒した.mp3"; sourceTree = "<group>"; };
+		187327512B8063C500668F3C /* 味方攻撃.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "味方攻撃.mp3"; path = "../../itQuiz 音声/味方攻撃.mp3"; sourceTree = "<group>"; };
+		187327522B8063C500668F3C /* 正解.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "正解.mp3"; path = "../../itQuiz 音声/正解.mp3"; sourceTree = "<group>"; };
+		187327532B8063C500668F3C /* 不正解.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "不正解.mp3"; path = "../../itQuiz 音声/不正解.mp3"; sourceTree = "<group>"; };
+		187327542B8063C500668F3C /* おとも切り替え.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "おとも切り替え.mp3"; path = "../../itQuiz 音声/おとも切り替え.mp3"; sourceTree = "<group>"; };
+		187327602B8065B100668F3C /* AVKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS17.2.sdk/System/Library/Frameworks/AVKit.framework; sourceTree = DEVELOPER_DIR; };
+		1896FEF62B80AC0E00A5977F /* BackGroundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackGroundView.swift; sourceTree = "<group>"; };
+		1896FEF82B80CBCA00A5977F /* TopView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopView.swift; sourceTree = "<group>"; };
+		1896FEFA2B80CC8E00A5977F /* SettingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SettingView.swift; path = "../../名称未設定フォルダ 2/SettingView.swift"; sourceTree = "<group>"; };
+		1896FEFC2B80CCF800A5977F /* TermsOfServiceView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TermsOfServiceView.swift; path = "../../名称未設定フォルダ/TermsOfServiceView.swift"; sourceTree = "<group>"; };
+		1896FEFD2B80CCF800A5977F /* PrivacyView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PrivacyView.swift; path = "../../名称未設定フォルダ/PrivacyView.swift"; sourceTree = "<group>"; };
+		1896FF002B81B37C00A5977F /* ManagerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagerView.swift; sourceTree = "<group>"; };
 		18EFB8452B7E4872008AC2B8 /* chatAi.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = chatAi.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		18EFB8482B7E4872008AC2B8 /* chatAiApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = chatAiApp.swift; sourceTree = "<group>"; };
 		18EFB84A2B7E4872008AC2B8 /* ChatView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatView.swift; sourceTree = "<group>"; };
@@ -80,6 +122,7 @@
 			files = (
 				3DB0DF1CB30271309C3BD9F7 /* Pods_chatAi.framework in Frameworks */,
 				18EFB8772B7E62AE008AC2B8 /* OpenAIKit in Frameworks */,
+				187327612B8065B100668F3C /* AVKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -130,11 +173,31 @@
 				182F36DE2B7F2083001394FB /* Info.plist */,
 				18EFB8482B7E4872008AC2B8 /* chatAiApp.swift */,
 				18EFB84A2B7E4872008AC2B8 /* ChatView.swift */,
+				1896FEF82B80CBCA00A5977F /* TopView.swift */,
+				187327442B8046F600668F3C /* ChatHistoryView.swift */,
 				18EFB87A2B7F122D008AC2B8 /* TestView.swift */,
 				18EFB8782B7F0909008AC2B8 /* ContentView.swift */,
+				1896FEF62B80AC0E00A5977F /* BackGroundView.swift */,
+				187327462B80627E00668F3C /* AvatarListView.swift */,
+				1896FF002B81B37C00A5977F /* ManagerView.swift */,
+				187327482B8062E500668F3C /* AudioManager.swift */,
 				187327422B7F9D2500668F3C /* AvatarTopView.swift */,
 				182F36DF2B7F233D001394FB /* SignUp.swift */,
+				1896FEFA2B80CC8E00A5977F /* SettingView.swift */,
+				1896FEFD2B80CCF800A5977F /* PrivacyView.swift */,
+				1896FEFC2B80CCF800A5977F /* TermsOfServiceView.swift */,
 				182F36E12B7F24BC001394FB /* AuthManager.swift */,
+				187327542B8063C500668F3C /* おとも切り替え.mp3 */,
+				1873274B2B8063C500668F3C /* カウントダウン.mp3 */,
+				1873274C2B8063C500668F3C /* ガチャる.mp3 */,
+				1873274E2B8063C500668F3C /* キャンセル.mp3 */,
+				1873274D2B8063C500668F3C /* ホームに戻る.mp3 */,
+				1873274A2B8063C500668F3C /* レベルアップ回復.mp3 */,
+				187327522B8063C500668F3C /* 正解.mp3 */,
+				1873274F2B8063C500668F3C /* 敵攻撃.mp3 */,
+				187327502B8063C500668F3C /* 倒した.mp3 */,
+				187327532B8063C500668F3C /* 不正解.mp3 */,
+				187327512B8063C500668F3C /* 味方攻撃.mp3 */,
 				18EFB84C2B7E4874008AC2B8 /* Assets.xcassets */,
 				18EFB84E2B7E4874008AC2B8 /* chatAi.entitlements */,
 				18EFB87C2B7F1948008AC2B8 /* GoogleService-Info.plist */,
@@ -171,6 +234,7 @@
 		3969DE3C206019AB2440C167 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				187327602B8065B100668F3C /* AVKit.framework */,
 				F14DD4337C194C3B52927303 /* Pods_chatAi.framework */,
 				E0CD3B981536DA45C9B1085B /* Pods_chatAi_chatAiUITests.framework */,
 				330E0F950590C0D7AC44D119 /* Pods_chatAiTests.framework */,
@@ -306,9 +370,20 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				187327592B8063C600668F3C /* キャンセル.mp3 in Resources */,
+				1873275F2B8063C600668F3C /* おとも切り替え.mp3 in Resources */,
+				187327562B8063C600668F3C /* カウントダウン.mp3 in Resources */,
 				18EFB8512B7E4874008AC2B8 /* Preview Assets.xcassets in Resources */,
+				1873275A2B8063C600668F3C /* 敵攻撃.mp3 in Resources */,
+				187327582B8063C600668F3C /* ホームに戻る.mp3 in Resources */,
+				1873275E2B8063C600668F3C /* 不正解.mp3 in Resources */,
+				187327572B8063C600668F3C /* ガチャる.mp3 in Resources */,
+				1873275D2B8063C600668F3C /* 正解.mp3 in Resources */,
 				18EFB84D2B7E4874008AC2B8 /* Assets.xcassets in Resources */,
 				18EFB87D2B7F1948008AC2B8 /* GoogleService-Info.plist in Resources */,
+				1873275C2B8063C600668F3C /* 味方攻撃.mp3 in Resources */,
+				187327552B8063C600668F3C /* レベルアップ回復.mp3 in Resources */,
+				1873275B2B8063C600668F3C /* 倒した.mp3 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -438,11 +513,20 @@
 			files = (
 				18EFB87B2B7F122D008AC2B8 /* TestView.swift in Sources */,
 				182F36E22B7F24BC001394FB /* AuthManager.swift in Sources */,
+				1896FF012B81B37C00A5977F /* ManagerView.swift in Sources */,
 				187327432B7F9D2500668F3C /* AvatarTopView.swift in Sources */,
 				18EFB84B2B7E4872008AC2B8 /* ChatView.swift in Sources */,
 				18EFB8492B7E4872008AC2B8 /* chatAiApp.swift in Sources */,
+				1896FEFE2B80CCF800A5977F /* TermsOfServiceView.swift in Sources */,
+				187327472B80627E00668F3C /* AvatarListView.swift in Sources */,
+				187327452B8046F600668F3C /* ChatHistoryView.swift in Sources */,
 				18EFB8792B7F0909008AC2B8 /* ContentView.swift in Sources */,
+				1896FEFB2B80CC8E00A5977F /* SettingView.swift in Sources */,
+				1896FEF72B80AC0E00A5977F /* BackGroundView.swift in Sources */,
+				187327492B8062E500668F3C /* AudioManager.swift in Sources */,
+				1896FEF92B80CBCA00A5977F /* TopView.swift in Sources */,
 				182F36E02B7F233D001394FB /* SignUp.swift in Sources */,
+				1896FEFF2B80CCF800A5977F /* PrivacyView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

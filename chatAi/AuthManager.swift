@@ -12,7 +12,9 @@ import OpenAIKit
 class AuthManager: ObservableObject {
     @Published var user: FirebaseAuth.User?
     @Published var money: Int = 0
+    @Published var level: Int = 0
     @Published var coinCount: Int = 0
+    @Published var avatars: [Avatar] = []
     
     var onLoginCompleted: (() -> Void)?
     var currentUserId: String? {
@@ -31,6 +33,13 @@ class AuthManager: ObservableObject {
         let instance = AuthManager()
         return instance
     }()
+    
+    func checkIfUserIdExists(userId: String, completion: @escaping (Bool) -> Void) {
+        let userRef = Database.database().reference().child("users").child(userId)
+        userRef.observeSingleEvent(of: .value) { (snapshot) in
+            completion(snapshot.exists())
+        }
+    }
     
     func fetchCoinCount() {
         guard let userId = user?.uid else { return }
@@ -66,9 +75,8 @@ class AuthManager: ObservableObject {
     }
     
     func saveMessage(userId: String, message: ChatMessage) {
-        let ref = Database.database().reference().child("messages").childByAutoId() // メッセージのための新しいIDを生成
+        let ref = Database.database().reference().child("messages").child(userId).childByAutoId() // メッセージのための新しいIDを生成
         let messageData: [String: Any] = [
-            "userId": userId,
             "content": message.content,
             "role": message.role.rawValue,
             "timestamp": ServerValue.timestamp() // Firebaseのサーバータイムスタンプを使用
@@ -82,27 +90,197 @@ class AuthManager: ObservableObject {
             }
         }
     }
+    
+    func switchAvatar(to newAvatar: Avatar, completion: @escaping (Bool) -> Void) {
+        guard let userId = user?.uid else {
+            completion(false) // user IDがnilなので、失敗としてfalseを返します。
+            return
+        }
+        
+        let avatarsRef = Database.database().reference()
+            .child("users")
+            .child(userId)
+            .child("avatars")
+        
+        avatarsRef.observeSingleEvent(of: .value) { snapshot in
+            for child in snapshot.children {
+                guard let childSnapshot = child as? DataSnapshot else { continue }
+                let avatarKey = childSnapshot.key
+                let avatarRef = avatarsRef.child(avatarKey)
+                avatarRef.updateChildValues(["usedFlag": 0])
+            }
+            
+            if let avatarKey = snapshot.children.allObjects.first(where: { (child) -> Bool in
+                guard let childSnapshot = child as? DataSnapshot,
+                      let avatarData = childSnapshot.value as? [String: Any],
+                      let name = avatarData["name"] as? String else { return false }
+                return name == newAvatar.name
+            }) as? DataSnapshot {
+                let avatarRef = avatarsRef.child(avatarKey.key)
+                avatarRef.updateChildValues(["usedFlag": 1]) { (error, ref) in
+                    if let error = error {
+                        print("Failed to update avatar: \(error.localizedDescription)")
+                        completion(false) // 更新に失敗したので、falseを返します。
+                    } else {
+                        print("Successfully updated avatar.")
+                        self.fetchAvatars {
+                            completion(true) // 更新に成功したので、trueを返します。
+                        }
+                    }
+                }
+            } else {
+                completion(false) // 新しいアバターが見つからなかったので、falseを返します。
+            }
+        }
+    }
+    
+    func switchBackground(to newAvatar: Avatar, completion: @escaping (Bool) -> Void) {
+        guard let userId = user?.uid else {
+            completion(false) // user IDがnilなので、失敗としてfalseを返します。
+            return
+        }
+        
+        let backgroundsRef = Database.database().reference()
+            .child("users")
+            .child(userId)
+            .child("backgrounds")
+        
+        backgroundsRef.observeSingleEvent(of: .value) { snapshot in
+            for child in snapshot.children {
+                guard let childSnapshot = child as? DataSnapshot else { continue }
+                let backgroundKey = childSnapshot.key
+                let backgroundsRef = backgroundsRef.child(backgroundKey)
+                backgroundsRef.updateChildValues(["usedFlag": 0])
+            }
+            
+            if let backgroundKey = snapshot.children.allObjects.first(where: { (child) -> Bool in
+                guard let childSnapshot = child as? DataSnapshot,
+                      let backgroundData = childSnapshot.value as? [String: Any],
+                      let name = backgroundData["name"] as? String else { return false }
+                return name == newAvatar.name
+            }) as? DataSnapshot {
+                let backgroundRef = backgroundsRef.child(backgroundKey.key)
+                backgroundRef.updateChildValues(["usedFlag": 1]) { (error, ref) in
+                    if let error = error {
+                        print("Failed to update avatar: \(error.localizedDescription)")
+                        completion(false) // 更新に失敗したので、falseを返します。
+                    } else {
+                        print("Successfully updated avatar.")
+                        self.fetchAvatars {
+                            completion(true) // 更新に成功したので、trueを返します。
+                        }
+                    }
+                }
+            } else {
+                completion(false) // 新しいアバターが見つからなかったので、falseを返します。
+            }
+        }
+    }
+    
+    func addHeartToAvatar(userId: String, additionalHeart: Int, completion: @escaping (Bool) -> Void) {
+           let avatarsRef = Database.database().reference().child("users").child(userId).child("avatars")
+           avatarsRef.observeSingleEvent(of: .value) { snapshot in
+               var updated = false
+               
+               // 各アバターをループして、usedFlagが1のアバターを見つける
+               for child in snapshot.children {
+                   if let childSnapshot = child as? DataSnapshot,
+                      let avatarData = childSnapshot.value as? [String: Any],
+                      let usedFlag = avatarData["usedFlag"] as? Int,
+                      usedFlag == 1 {
+                       var newHeart = avatarData["heart"] as? Int ?? 0
+                       newHeart += additionalHeart // heartに値を加算
+                       
+                       // 更新されたheartの値をデータベースに保存
+                       childSnapshot.ref.updateChildValues(["heart": newHeart]) { error, _ in
+                           if let error = error {
+                               print("Failed to update avatar's heart: \(error.localizedDescription)")
+                           } else {
+                               print("Successfully updated avatar's heart.")
+                               updated = true
+                           }
+                       }
+                       break
+                   }
+               }
+               
+               completion(updated)
+           }
+       }
+    
+    func fetchAvatars(completion: @escaping () -> Void) {
+        guard let userId = user?.uid else { return }
+        let userRef = Database.database().reference().child("users").child(userId).child("avatars")
+        userRef.observeSingleEvent(of: .value) { (snapshot: DataSnapshot) in
+            var newAvatars: [Avatar] = []
+            for child in snapshot.children {
+                if let childSnapshot = child as? DataSnapshot,
+                   let avatarData = childSnapshot.value as? [String: Any],
+                   let name = avatarData["name"] as? String,
+                   let heart = avatarData["heart"] as? Int,
+                   let attack = avatarData["attack"] as? Int,
+                   let health = avatarData["health"] as? Int,
+                   let usedFlag = avatarData["usedFlag"] as? Int,
+                   let count = avatarData["count"] as? Int {
+                    let avatar = Avatar(name: name,heart: heart, attack: attack, health: health, usedFlag: usedFlag, count: count)
+                    newAvatars.append(avatar)
+                }
+            }
+            DispatchQueue.main.async {
+                self.avatars = newAvatars
+            }
 
-//    func loadMessages(completion: @escaping ([ChatMessage]) -> Void) {
-//        let ref = Database.database().reference().child("messages")
-//        ref.observe(.value) { snapshot in
-//            var messages: [ChatMessage] = []
-//            
-//            for child in snapshot.children {
-//                if let snapshot = child as? DataSnapshot,
-//                   let value = snapshot.value as? [String: Any],
-//                   let userId = value["userId"] as? String,
-//                   let content = value["content"] as? String,
-//                   let roleString = value["role"] as? String,
-//                   let role = ChatMessage.Role(rawValue: roleString) {
-//                    let message = ChatMessage(role: role, content: content)
-//                    messages.append(message)
-//                }
-//            }
-//            
-//            completion(messages)
-//        }
-//    }
+            completion() // データがフェッチされた後にクロージャを呼び出す
+        }
+    }
+    
+    func fetchUserInfo(completion: @escaping (String?, [[String: Any]]?, Int?, Int?, Int?, Int?) -> Void) {
+        guard let userId = user?.uid else {
+            completion(nil, nil, nil, nil, nil, nil)
+            return
+        }
+        let userRef = Database.database().reference().child("users").child(userId)
+        userRef.observeSingleEvent(of: .value) { (snapshot) in
+            if let data = snapshot.value as? [String: Any],
+               let userName = data["userName"] as? String,
+               let avatarsData = data["avatars"] as? [String:[String: Any]],
+               let userMoney = data["userMoney"] as? Int,
+               let userHp = data["userHp"] as? Int,
+               let userAttack = data["userAttack"] as? Int,
+               let tutorialNum = data["tutorialNum"] as? Int {  // 追加
+
+                var filteredAvatars: [[String: Any]] = []
+                for (_, avatarData) in avatarsData {
+                    if avatarData["usedFlag"] as? Int == 1 {
+                        filteredAvatars.append(avatarData)
+                    }
+                }
+                completion(userName, filteredAvatars, userMoney, userHp, userAttack, tutorialNum)  // 追加
+            } else {
+                completion(nil, nil, nil, nil, nil, nil)  // 追加
+            }
+        }
+    }
+
+    func loadMessages(userId: String, completion: @escaping ([ChatMessage]) -> Void) {
+        let ref = Database.database().reference().child("messages").child(userId)
+        ref.observe(.value) { snapshot in
+            var messages: [ChatMessage] = []
+            
+            for child in snapshot.children {
+                if let snapshot = child as? DataSnapshot,
+                   let value = snapshot.value as? [String: Any],
+                   let content = value["content"] as? String,
+                   let roleString = value["role"] as? String {
+                   let role = ChatRole(rawValue: roleString) ?? .user
+                   let message = ChatMessage(role: role, content: content)
+                   messages.append(message)
+                }
+            }
+            
+            completion(messages)
+        }
+    }
 
     
     func saveLastLoginDate(userId: String, completion: @escaping (Bool) -> Void) {

@@ -12,14 +12,14 @@ struct Chat: View {
     
     // ユーザーが入力するテキストを保存する変数
     @State private var text: String = ""
-    
+    @ObservedObject var authManager = AuthManager.shared
     // チャットメッセージの配列
     @State private var chat: [ChatMessage] = [
 //        ChatMessage(role: .system, content: "あなたは、ユーザーの質問や会話に回答するロボットです。"),
 //        ChatMessage(role: .system, content:"こんにちは。何かお困りのことがあればおっしゃってください。")
         ChatMessage(role: .system, content: "こちらではAIアシスタントのだっちゃんが会話を行います。だっちゃんは語尾に必ずだっちゃを付けます。可愛くて愛情たっぷりな表現をするのが得意です。"),
         ChatMessage(role: .assistant, content: "私の名前はだっちゃんだっちゃ。はじめてですが、愛に溢れているのでお裾分けしてあげるだっちゃ。よろしくだっちゃ"),
-        ChatMessage(role: .user, content: "これからよろしくね！会話を楽しもう！")
+//        ChatMessage(role: .user, content: "これからよろしくね！会話を楽しもう！")
     ]
     
     // チャット画面のビューレイアウト
@@ -63,13 +63,21 @@ struct Chat: View {
                     // ユーザーのメッセージをチャットに追加
                     chat.append(ChatMessage(role: .user, content: text))
                     text = "" // テキストフィールドをクリア
-                    
+                    if let userId = authManager.currentUserId {
+                        authManager.addHeartToAvatar(userId: userId, additionalHeart: 5) { success in
+                            if success {
+                                print("Heart added successfully.")
+                            } else {
+                                print("Failed to add heart.")
+                            }
+                        }
+                    }
                     Task {
                         do {
                             // OpenAIの設定
                             let config = Configuration(
                                 organizationId: "org-dPUAuIy1CBxghho0gfTEk53n",
-                                apiKey: "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"
+                                apiKey: "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"
                             )
                             let openAI = OpenAI(config)
                             let chatParameters = ChatParameters(model: ChatModels(rawValue: "gpt-3.5-turbo")!, messages: chat)
@@ -150,7 +158,8 @@ struct MessageAvatarView: View {
             VStack(alignment: .leading, spacing: 4) {
                 ZStack {
                     Text(message.content!)
-                        .font(.system(size: 14))
+//                    Text("あああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああ")
+                        .font(.system(size: 16))
                         .foregroundColor(message.role.rawValue == "user" ? .white : .black)
                         .padding(10)
                         .background(message.role.rawValue == "user" ? Color(#colorLiteral(red: 0.2078431373, green: 0.7647058824, blue: 0.3450980392, alpha: 1)) : Color(#colorLiteral(red: 0.9098039216, green: 0.9098039216, blue: 0.9176470588, alpha: 1)))
@@ -167,9 +176,9 @@ struct MessageAvatarView: View {
             .padding(.vertical, 5)
 
             // ユーザーのメッセージの場合は右側にスペースを追加
-            if message.role.rawValue != "user" {
-                Spacer()
-            }
+//            if message.role.rawValue != "user" {
+//                Spacer()
+//            }
             }
         }
         .padding(.horizontal)
@@ -179,19 +188,38 @@ struct MessageAvatarView: View {
 // アバタービュー
 struct AvatarView: View {
     var imageName: String
+    @State private var userName: String = ""
+    @State private var avatar: [[String: Any]] = []
+    @State private var userMoney: Int = 0
+    @State private var userLevel: Int = 0
+    @State private var userHp: Int = 100
+    @State private var userAttack: Int = 20
+    @State private var tutorialNum: Int = 0
+    @ObservedObject var authManager = AuthManager.shared
     
     var body: some View {
         VStack {
             // アバター画像を円形に表示
-            Image(systemName: "person.crop.circle")
+            Image(avatar.isEmpty ? "defaultIcon" : (avatar.first?["name"] as? String) ?? "")
                 .resizable()
                 .frame(width: 30, height: 30)
                 .clipShape(Circle())
             
             // AIの名前を表示
-            Text("AI")
+            Text(avatar.isEmpty ? "defaultIcon" : (avatar.first?["name"] as? String) ?? "")
                 .font(.caption) // フォントサイズを小さくするためのオプションです。
                 .foregroundColor(.black) // テキストの色を黒に設定します。
+        }
+        .onAppear{
+            authManager.fetchUserInfo { (name, avatar, level, money, hp, attack, tutorialNum) in
+                self.userName = name ?? ""
+                self.avatar = avatar ?? [[String: Any]]()
+                self.userLevel = level ?? 0
+                self.userMoney = money ?? 0
+                self.userHp = hp ?? 100
+                self.userAttack = attack ?? 20
+                self.tutorialNum = tutorialNum ?? 0
+            }
         }
     }
 }

@@ -9,6 +9,7 @@ import SwiftUI
 
 struct Avatar: Equatable {
     var name: String
+    var heart: Int
     var attack: Int
     var health: Int
     var usedFlag: Int
@@ -104,9 +105,9 @@ struct ImagePickerView: View {
     let defaultImage = UIImage(named: "defaultProfileImage")
     @State private var selectedAvatar: Avatar? // 選択したアバターを保持するプロパティ
     let avatars = [
-        Avatar(name: "ネッキー", attack: 10, health: 20, usedFlag: 1, count: 1),
-        Avatar(name: "ピョン吉", attack: 15, health: 15, usedFlag: 0, count: 1),
-        Avatar(name: "ルイーカ", attack: 20, health: 10, usedFlag: 0, count: 1)
+        Avatar(name: "ハムたむ",heart: 0, attack: 10, health: 20, usedFlag: 1, count: 1),
+        Avatar(name: "アプル君",heart: 0, attack: 15, health: 15, usedFlag: 1, count: 1),
+        Avatar(name: "ライム",heart: 0, attack: 20, health: 10, usedFlag: 1, count: 1)
     ]
     @Environment(\.presentationMode) var presentationMode
     @State private var navigateToContentView: Bool = false
@@ -176,7 +177,7 @@ struct ImagePickerView: View {
                     }
                 Spacer()
                 Button(action: {
-                    let selectedAvatar = Avatar(name: self.selectedAvatar?.name ?? "ネッキー", attack: 20, health: 20 ,usedFlag: 1, count:1)
+                    let selectedAvatar = Avatar(name: self.selectedAvatar?.name ?? "ネッキー",heart: 0, attack: 20, health: 20 ,usedFlag: 1, count:1)
                     authManager.saveUserToDatabase(userName: userName) { success in
                         if success {
                             authManager.addAvatarToUser(avatar: selectedAvatar) { success in

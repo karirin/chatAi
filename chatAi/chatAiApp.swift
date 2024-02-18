@@ -12,10 +12,7 @@ import Firebase
 class AppDelegate: NSObject, UIApplicationDelegate {
   func application(_ application: UIApplication,
                    didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
-    FirebaseApp.configure()
-      if let userId = Auth.auth().currentUser?.uid {
-          AuthManager.shared.updateCoinCountBasedOnLastLogin(userId: userId)
-      }
+    
 
     return true
   }
@@ -23,15 +20,37 @@ class AppDelegate: NSObject, UIApplicationDelegate {
 
 @main
 struct chatAiApp: App {
+    
   // register app delegate for Firebase setup
   @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
-
+    @State static private var showExperienceModalPreview = false
+    @State private var isUserExists: Bool? = nil
+    
+    init() {
+        FirebaseApp.configure()
+    }
 
   var body: some Scene {
     WindowGroup {
       NavigationView {
-        ContentView()
+//        ContentView()
+//          SignUp()
 //          Chat()
+         if isUserExists == false || isUserExists == nil {
+              SignUp()
+          } else {
+              //                ContentView(isPresentingQuizBeginnerList: .constant(false), isPresentingAvatarList: .constant(false))
+              //                ContentView()
+              TopView()
+          }
+      }.onAppear {
+          if let userId = AuthManager.shared.currentUserId {
+              AuthManager.shared.checkIfUserIdExists(userId: userId) { exists in
+                  self.isUserExists = exists
+              }
+          } else {
+              self.isUserExists = false
+          }
       }
     }
   }

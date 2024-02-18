@@ -63,6 +63,7 @@ struct AvatarTopView: View {
             VStack{
                 if let lastMessage = chat.last {
                     MessageAvatarView(message: lastMessage)
+//                    MessageAvatarView()
                 }
             }
             .position(x: UIScreen.main.bounds.width / 2, y: 280)
