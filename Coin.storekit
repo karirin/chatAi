@@ -1,0 +1,172 @@
+{
+  "identifier" : "F14F8CAF",
+  "nonRenewingSubscriptions" : [
+
+  ],
+  "products" : [
+    {
+      "displayPrice" : "1.00",
+      "familyShareable" : false,
+      "internalID" : "E25A6065",
+      "localizations" : [
+        {
+          "description" : "100円",
+          "displayName" : "100円",
+          "locale" : "ja"
+        }
+      ],
+      "productID" : "chat.coin30",
+      "referenceName" : "100円",
+      "type" : "Consumable"
+    },
+    {
+      "displayPrice" : "5.00",
+      "familyShareable" : false,
+      "internalID" : "3E868594",
+      "localizations" : [
+        {
+          "description" : "500円",
+          "displayName" : "500円",
+          "locale" : "ja"
+        }
+      ],
+      "productID" : "chat.coin180",
+      "referenceName" : "500円",
+      "type" : "Consumable"
+    },
+    {
+      "displayPrice" : "10.00",
+      "familyShareable" : false,
+      "internalID" : "A82D1292",
+      "localizations" : [
+        {
+          "description" : "1000円",
+          "displayName" : "1000円",
+          "locale" : "ja"
+        }
+      ],
+      "productID" : "chat.coin390",
+      "referenceName" : "1000円",
+      "type" : "Consumable"
+    }
+  ],
+  "settings" : {
+    "_failTransactionsEnabled" : false,
+    "_storeKitErrors" : [
+      {
+        "current" : null,
+        "enabled" : false,
+        "name" : "Load Products"
+      },
+      {
+        "current" : null,
+        "enabled" : false,
+        "name" : "Purchase"
+      },
+      {
+        "current" : null,
+        "enabled" : false,
+        "name" : "Verification"
+      },
+      {
+        "current" : null,
+        "enabled" : false,
+        "name" : "App Store Sync"
+      },
+      {
+        "current" : null,
+        "enabled" : false,
+        "name" : "Subscription Status"
+      },
+      {
+        "current" : null,
+        "enabled" : false,
+        "name" : "App Transaction"
+      },
+      {
+        "current" : null,
+        "enabled" : false,
+        "name" : "Manage Subscriptions Sheet"
+      },
+      {
+        "current" : null,
+        "enabled" : false,
+        "name" : "Refund Request Sheet"
+      },
+      {
+        "current" : null,
+        "enabled" : false,
+        "name" : "Offer Code Redeem Sheet"
+      }
+    ]
+  },
+  "subscriptionGroups" : [
+    {
+      "id" : "DD57BFCF",
+      "localizations" : [
+
+      ],
+      "name" : "Sub",
+      "subscriptions" : [
+        {
+          "adHocOffers" : [
+
+          ],
+          "codeOffers" : [
+
+          ],
+          "displayPrice" : "9.80",
+          "familyShareable" : false,
+          "groupNumber" : 1,
+          "internalID" : "C176DF82",
+          "introductoryOffer" : null,
+          "localizations" : [
+            {
+              "description" : "１ヶ月プラン",
+              "displayName" : "基本プラン",
+              "locale" : "ja"
+            }
+          ],
+          "productID" : "chatMonth",
+          "recurringSubscriptionPeriod" : "P1M",
+          "referenceName" : "基本プラン",
+          "subscriptionGroupID" : "DD57BFCF",
+          "type" : "RecurringSubscription"
+        },
+        {
+          "adHocOffers" : [
+
+          ],
+          "codeOffers" : [
+
+          ],
+          "displayPrice" : "4.80",
+          "familyShareable" : false,
+          "groupNumber" : 1,
+          "internalID" : "1D6453F0",
+          "introductoryOffer" : {
+            "displayPrice" : "0.99",
+            "internalID" : "16D6076F",
+            "paymentMode" : "none"
+          },
+          "localizations" : [
+            {
+              "description" : "１週間プラン",
+              "displayName" : "お試しプラン",
+              "locale" : "ja"
+            }
+          ],
+          "productID" : "chatWeek",
+          "recurringSubscriptionPeriod" : "P1W",
+          "referenceName" : "お試しプラン",
+          "subscriptionGroupID" : "DD57BFCF",
+          "type" : "RecurringSubscription"
+        }
+      ]
+    }
+  ],
+  "version" : {
+    "major" : 3,
+    "minor" : 0
+  }
+}

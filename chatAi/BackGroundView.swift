@@ -1,21 +1,28 @@
 //
-//  BackGroundView.swift
-//  chatAi
+//  IllustratedView.swift
+//  it
 //
-//  Created by Apple on 2024/02/17.
+//  Created by hashimo ryoya on 2023/11/07.
 //
 
 import SwiftUI
 import Firebase
 
-struct BackGroundView: View {
+struct Background: Equatable {
+    let name: String  // これが一意の識別子として機能します
+    var usedFlag: Int
+}
+
+struct BackgroundView: View {
     let items = ["もりこう","ライム", "レッドドラゴン", "レインボードラゴン"]
     
     struct Item: Identifiable {
         let name: String  // これが一意の識別子として機能します
-        let attack: String
+        let imageName: String
+        let condition: String
+        let attack: Int
         let probability: Int
-        let health: String
+        let health: Int
         let rarity: Rarity
         var id: String { name }  // Identifiable の要件を満たすために name を id として使用
     }
@@ -44,31 +51,26 @@ struct BackGroundView: View {
     }
     
     let allItems: [Item] = [
-        Item(name: "背景1", attack: "大平原エリア", probability: 25,health: "異常に広い平原", rarity: .normal),
-        Item(name: "背景2", attack: "海中エリア", probability: 25,health: "レベル３で行けるエリア\n魚が多い", rarity: .normal),
-        Item(name: "背景3", attack: "プラチナスター", probability: 25, health: "レベル１０を達成したことを讃える称号", rarity: .normal),
-        Item(name: "背景4", attack: "ブロンズコイン", probability: 25, health: "問題の回答数が３０問を達成したことを讃える称号", rarity: .normal),
-        Item(name: "背景5", attack: "シルバーコイン", probability: 25, health: "問題の回答数が５０問を達成したことを讃える称号", rarity: .normal),
-        Item(name: "回答数１００", attack: "ゴールドコイン", probability: 25, health: "問題の回答数が１００問を達成したことを讃える称号", rarity: .normal),
-        Item(name: "おとも１０種類制覇", attack: "ライムコイン", probability: 10, health: "おともを１０種類仲間にしたことを讃える称号", rarity: .rare),
-        Item(name: "おとも２０種類制覇", attack: "覚醒ライムの盾", probability: 10, health: "おともを２０種類仲間にしたことを讃える称号", rarity: .rare)
+        Item(name: "背景1", imageName: "お部屋", condition: "", attack: 10, probability: 25,health: 20, rarity: .normal),
+        Item(name: "背景2", imageName: "大草原", condition: "親密度が300以上だと解放されます", attack: 15, probability: 25,health: 15, rarity: .normal),
+        Item(name: "背景3", imageName: "海中", condition: "親密度が500以上だと解放されます", attack: 20, probability: 25, health: 10, rarity: .normal),
+        Item(name: "背景4", imageName: "洞窟", condition: "親密度が800以上だと解放されます", attack: 20, probability: 25, health: 100, rarity: .normal),
+        Item(name: "背景5", imageName: "宇宙", condition: "親密度が1000以上だと解放されます", attack: 20, probability: 25, health: 100, rarity: .normal)
     ]
     
     @State private var selectedItem: Item?
-    @State private var avatars: [String] = []
+    @State private var usedBackground: Background?
+    @State private var backgrounds: [String] = []
     @ObservedObject var authManager = AuthManager.shared
     @Environment(\.presentationMode) var presentationMode
     @ObservedObject var audioManager = AudioManager.shared
     // アラートを表示するかどうかを制御するState変数
     @State private var showingAlert1 = false
     @State private var showingAlert2 = false
+    @State private var changeFlag = false
     // 切り替えるアバターを保持するState変数
-    @State private var switchingAvatar: Avatar?
-    @Binding var isPresenting: Bool
-    
-    init(isPresenting: Binding<Bool>) {
-        _isPresenting = isPresenting
-    }
+    @State private var switchingBackground: Item?
+    @State private var previouslySelectedItemName: String? = nil
     
     // グリッドのレイアウトを定義
     var columns: [GridItem] = [
@@ -76,180 +78,227 @@ struct BackGroundView: View {
         GridItem(.flexible()),
         GridItem(.flexible())
     ]
-    
-    @State private var backgrounds: [String: Bool] = [:] // ユーザーの称号データ
-
-    // ユーザーの称号データを取得する関数
-    func fetchUserBackgrounds(userId: String) {
-        let backgroundsRef = Database.database().reference().child("backgrounds").child(userId)
-        backgroundsRef.observeSingleEvent(of: .value) { snapshot in
-            if let backgrounds = snapshot.value as? [String: Bool] {
-                self.backgrounds = backgrounds
-            }
-        }
-    }
 
     var body: some View {
+        
         VStack {
-            // 選択されたアイテムを大きく表示
-            if let selected = selectedItem {
-                if backgrounds[selected.name] == true {
-                    ZStack{
-//                        Image("\(selected.rarity.displayString)")
-//                            .resizable()
-//                            .frame(width: 70,height:70)
-//                            .padding(.trailing,240)
-//                            .padding(.bottom,100)
-                        VStack {
-                            Text(selected.attack)
-                                .font(.system(size:28))
-                                .fontWeight(.bold)
-                                .foregroundColor(Color.gray)
+            if authManager.backgrounds.isEmpty {
+                ActivityIndicator()
+            } else {
+                // 選択されたアイテムを大きく表示
+                if let selected = selectedItem {
+                    if authManager.backgrounds.contains(where: { $0.name == selected.name }) {
+                        Text(selected.imageName)
+                            .font(.system(size:24))
+                            .fontWeight(.bold)
+                            .foregroundColor(Color.gray)
+                        ZStack{
+                            
                             Image(selected.name)
                                 .resizable()
                                 .aspectRatio(contentMode: .fit)
                                 .frame(height: 180)
                                 .cornerRadius(15)
-                                .frame(height:180)
-                            Text(selected.health)
-                                .font(.system(size:24))
-                                .foregroundColor(Color("fontGray"))
-                                .padding(.horizontal)
-                                .frame(height:60)
-//                            HStack{
-//                                Image("ハート")
-//                                    .resizable()
-//                                    .frame(width: 20,height:20)
-//                                Text("\(selected.health)")
-//                                    .font(.system(size:24))
-//                                    .foregroundColor(Color("fontGray"))
-//                                Image("ソード")
-//                                    .resizable()
-//                                    .frame(width: 25,height:20)
-//                                Text("\(selected.attack)")
-//                                    .font(.system(size:24))
-//                                    .foregroundColor(Color("fontGray"))
-//                            }
-                        }
-                    }
-                    
-                }else{
-                    ZStack{
-//                        Image("\(selected.rarity.displayString)")
-//                            .resizable()
-//                            .frame(width: 70,height:70)
-//                            .padding(.trailing,240)
-//                            .padding(.bottom,100)
-                        VStack {
-                            Text("???")
-                                .font(.system(size:28))
-                                .fontWeight(.bold)
-                                .foregroundColor(Color.gray)
-                            Image("\(selected.name)_南京錠")
-                                .resizable()
-                                .aspectRatio(contentMode: .fit)
-                                .frame(height: 180)
-                                .cornerRadius(15)
-                                .frame(height:180)
-                            Text(selected.health)
-                                .font(.system(size:24))
-                                .foregroundColor(Color("fontGray"))
-                                .padding(.horizontal)
-                                .frame(height:60)
-//                            HStack{
-//                                Image("ハート")
-//                                    .resizable()
-//                                    .frame(width: 20,height:20)
-//                                Text("???")
-//                                    .font(.system(size:24))
-//                                    .foregroundColor(Color("fontGray"))
-//                                Image("ソード")
-//                                    .resizable()
-//                                    .frame(width: 25,height:20)
-//                                Text("???")
-//                                    .font(.system(size:24))
-//                                    .foregroundColor(Color("fontGray"))
-//                            }
-                        }
-                    }
-                }
-            }
-            ScrollView {
-                        LazyVGrid(columns: columns, spacing: 20) {
-                            ForEach(allItems) { item in
+                            if usedBackground!.name == selected.name {
                                 VStack{
-                                    // ユーザーが持っているアバターの判定
-//                                    if authManager.avatars.contains(where: { $0.name == item.name }) {
-                                    if backgrounds[item.name] == true {
-                                        // ユーザーが持っているアバターの画像を表示
+                                    Spacer()
+                                        .frame(height:100)
+                                    HStack{
+                                        Spacer()
+                                            .frame(width:200)
+                                        Image("選択中")
+                                            .resizable()
+                                            .frame(width: 70, height: 30)
+                                    }
+                                }
+                            } else {
+                                VStack{
+                                    Spacer()
+                                        .frame(height:100)
+                                    HStack{
+                                        Spacer()
+                                            .frame(width:200)
                                         Button(action: {
-                                            selectedItem = item
-                                            showingAlert2 = true
                                             audioManager.playSound()
-                                            
+                                            self.switchingBackground = selected
+                                            self.showingAlert1 = true
                                         }) {
-                                            Image(item.name)
+                                            Image("切り替え")
                                                 .resizable()
-                                                .aspectRatio(contentMode: .fit)
-                                                .frame(width: 100, height: 100)
-                                                .padding(5)
-                                                .cornerRadius(8)
+                                                .frame(width: 70, height: 30)
                                         }
-                                    } else {
-                                        // ユーザーが持っていないアバターのシルエットを表示
-                                        Button(action: {
-                                            selectedItem = item
-                                            audioManager.playSound()
-                                        }) {
-                                            Image("\(item.name)_南京錠") // シルエット画像は適宜用意してください
-                                                .resizable()
-                                                .aspectRatio(contentMode: .fit)
-                                                .frame(width: 100, height: 100)
+                                        .alert(isPresented: $showingAlert1) {
+                                            Alert(
+                                                title: Text("エリアを切り替えますか？"),
+                                                primaryButton: .default(Text("はい"), action: {
+                                                    // はいを選択した場合、usedFlagを更新
+                                                    if let switchingBackground = switchingBackground {
+                                                        authManager.switchBackground(to: Background(name: switchingBackground.name, usedFlag: 1)) { success in
+                                                            if success {
+                                                                print("Avatar successfully added!")
+                                                                self.changeFlag = true
+                                                            } else {
+                                                                print("Failed to add avatar.")
+                                                            }
+                                                        }
+                                                    }
+                                                    changeFlag = true
+                                                    audioManager.playChangeSound()
+                                                }),
+                                                secondaryButton: .cancel(Text("キャンセル"))
+                                            )
                                         }
                                     }
                                 }
-                                .overlay(
-                                   RoundedRectangle(cornerRadius: 10)
-                                       .stroke((selectedItem?.name == item.name) ? Color.gray : Color.clear, lineWidth: 4)
-                               )
                             }
+                        }
+                        Spacer()
+                            .frame(height:50)
+                    }else{
+                        ZStack{
+                            Image("\(selected.rarity.displayString)")
+                                .resizable()
+                                .frame(width: 70,height:70)
+                                .padding(.trailing,240)
+                                .padding(.bottom,100)
+                            VStack {
+                                Text("???")
+                                    .font(.system(size:24))
+                                    .fontWeight(.bold)
+                                    .foregroundColor(Color.gray)
+                                Image("\(selected.name)_南京錠")
+                                    .resizable()
+                                    .aspectRatio(contentMode: .fit)
+                                    .frame(height: 180)
+                                    .cornerRadius(15)
+                                    .frame(height:180)
+                            }
+                        }
+                        HStack{
+                            Image("ハート")
+                                .resizable()
+                                .frame(width: 30,height:30)
+                                .padding(.trailing,-8)
+                            Text("\(selected.condition)")
+                                .font(.system(size:20))
+                                .foregroundColor(Color("fontGray"))
                         }
                     }
-            .alert(isPresented: $showingAlert2) {
-                Alert(
-                    title: Text("エリアを切り替えますか？"),
-                    primaryButton: .default(Text("はい"), action: {
-                        // はいを選択した場合、usedFlagを更新
-                        if let switchingAvatar = switchingAvatar {
-                            authManager.switchAvatar(to: switchingAvatar) { success in
-                                if success {
-                                    print("Avatar successfully added!")
+                }
+                ScrollView {
+                    LazyVGrid(columns: columns, spacing: 20) {
+                        ForEach(allItems) { item in
+                            VStack{
+                                // ユーザーが持っているアバターの判定
+                                if authManager.backgrounds.contains(where: { $0.name == item.name }) {
+                                    // ユーザーが持っているアバターの画像を表示
+                                    Button(action: {
+                                        if selectedItem?.name == item.name {
+                                            // すでに選択されているアイテムが再度選択された場合
+                                            if previouslySelectedItemName == item.name {
+                                                // ここでアラートを表示するなどのアクションを実行
+                                                self.switchingBackground = item
+                                                self.showingAlert2 = true
+                                            }
+                                        } else {
+                                            print("#")
+                                            // 新しいアイテムが選択された場合、それを記録
+                                            previouslySelectedItemName = item.name
+                                        }
+                                        selectedItem = item
+                                        audioManager.playSound()
+                                    }) {
+                                        Image(item.name)
+                                            .resizable()
+                                            .aspectRatio(contentMode: .fit)
+                                            .frame(width: 100, height: 100)
+                                            .padding(5)
+                                            .cornerRadius(8)
+                                    }
                                 } else {
-                                    print("Failed to add avatar.")
+                                    // ユーザーが持っていないアバターのシルエットを表示
+                                    Button(action: {
+                                        selectedItem = item
+                                        audioManager.playSound()
+                                    }) {
+                                        Image("\(item.name)_南京錠") // シルエット画像は適宜用意してください
+                                            .resizable()
+                                            .aspectRatio(contentMode: .fit)
+                                            .frame(width: 100, height: 100)
+                                    }
                                 }
                             }
+                            .overlay(
+                                RoundedRectangle(cornerRadius: 10)
+                                    .stroke((selectedItem?.name == item.name) ? Color.gray : Color.clear, lineWidth: 4)
+                            )
+                            .padding(.top,5)
                         }
-                        audioManager.playChangeSound()
-                    }),
-                    secondaryButton: .cancel(Text("キャンセル"))
-                )
+                    }
+                }
+                .alert(isPresented: $showingAlert2) {
+                    Alert(
+                        title: Text("エリアを切り替えますか？"),
+                        primaryButton: .default(Text("はい"), action: {
+                            // はいを選択した場合、usedFlagを更新
+                            if let switchingBackground = switchingBackground {
+                                authManager.switchBackground(to: Background(name:  switchingBackground.name, usedFlag: 1)) { success in
+                                    if success {
+                                        print("Avatar successfully added!")
+                                        changeFlag = true
+                                    } else {
+                                        print("Failed to add avatar.")
+                                    }
+                                }
+                            }
+                            audioManager.playChangeSound()
+                        }),
+                        secondaryButton: .cancel(Text("キャンセル"))
+                    )
+                }
+                
+                Spacer()
             }
-            .frame(maxWidth:.infinity,maxHeight:.infinity)
-            .onAppear {
-                self.fetchUserBackgrounds(userId: authManager.currentUserId ?? "")
-                authManager.fetchAvatars {
+        }
+        .frame(maxWidth:.infinity,maxHeight:.infinity)
+//            .padding(.top)
+//            .onReceive(authManager.$backgrounds) { newbackgrounds in
+//                if let updatedbackground = newbackgrounds.first(where: { $0.usedFlag == 1 }) {
+////                            print(updatedbackground)
+//                    self.selectedItem = updatedbackground
+//                }
+//            }
+//            .onReceive(authManager.backgrounds) { newBackgrounds in
+//                print("aaa")
+//                        // avatarsが更新されたときに呼ばれる
+//                        if let updatedBackground = newBackgrounds.first(where: { $0.usedFlag == 1 }) {
+////                            print(updatedAvatar)
+//                            self.usedBackground = updatedBackground
+//                        }
+//                    }
+        .onChange(of: changeFlag) { _ in
+            authManager.fetchUsedBackgrounds { usedBackgrounds in
+                self.usedBackground = usedBackgrounds.first { $0.usedFlag == 1 }
+            }
+            changeFlag = false
+        }
+        .onAppear {
+            authManager.fetchUsedBackgrounds { usedBackgrounds in
+                self.usedBackground = usedBackgrounds.first { $0.usedFlag == 1 }
+            }
+            self.selectedItem = Item(name: "背景1", imageName: "お部屋", condition: "", attack: 10, probability: 25,health: 20, rarity: .normal)
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                print("authManager.backgrounds:\(authManager.backgrounds)")
+                authManager.fetchBackgrounds {
                     for item in allItems {
-                        let contains = authManager.avatars.contains(where: { $0.name == item.name })
+                        let contains = authManager.backgrounds.contains(where: { $0.name == item.name })
+                        print("Contains \(item.name): \(contains)")
                     }
                 }
             }
-Spacer()
         }
         .padding(.top,5)
-        .onAppear {
-            self.selectedItem = Item(name: "背景1", attack: "大平原エリア", probability: 25,health: "異常に広い平原", rarity: .normal)
-        }
-        .background(Color(hue: 0.557, saturation: 0.098, brightness: 1.0))
+        .background(Color("background"))
         .navigationBarBackButtonHidden(true)
         .navigationBarItems(leading: Button(action: {
             self.presentationMode.wrappedValue.dismiss()
@@ -262,7 +311,7 @@ Spacer()
         })
         .toolbar {
                 ToolbarItem(placement: .principal) {
-                    Text("称号一覧")
+                    Text("おとも図鑑")
                         .font(.system(size: 20)) // ここでフォントサイズを指定
                         .foregroundColor(Color("fontGray"))
                 }
@@ -271,6 +320,5 @@ Spacer()
     }
 
 #Preview {
-    BackGroundView(isPresenting: .constant(false))
+    BackgroundView()
 }
-

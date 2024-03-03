@@ -25,6 +25,9 @@ class AudioManager: ObservableObject {
     var audioGameClearPlayer: AVPlayer?
     var audioGameOverPlayer: AVPlayer?
     var audioTittlePlayer: AVPlayer?
+    var audioTreasurePlayer: AVPlayer?
+    var audioCoinPlayer: AVPlayer?
+    var audioTouchPlayer: AVPlayer?
 
     @Published var isMuted: Bool = false
 
@@ -74,10 +77,19 @@ class AudioManager: ObservableObject {
         if let soundURL = Bundle.main.url(forResource: "称号", withExtension: "mp3") {
             audioTittlePlayer = AVPlayer(url: soundURL)
         }
+        if let soundURL = Bundle.main.url(forResource: "お宝を入手", withExtension: "mp3") {
+            audioTreasurePlayer = AVPlayer(url: soundURL)
+        }
+        if let soundURL = Bundle.main.url(forResource: "コイン", withExtension: "mp3") {
+            audioCoinPlayer = AVPlayer(url: soundURL)
+        }
+        if let soundURL = Bundle.main.url(forResource: "撫でる", withExtension: "mp3") {
+            audioTouchPlayer = AVPlayer(url: soundURL)
+        }
     }
     
     func toggleSound() {
-        let players = [audioPlayer, audioKetteiPlayer, audioCorrectPlayer,audioUnCorrectPlayer,audioAttackPlayer,audioMonsterAttackPlayer,audioCountdownPlayer,audioCancelPlayer,audioChangePlayer,audioReturnPlayer,audioDownPlayer,audioLevelUpPlayer,audioGameClearPlayer,audioGameOverPlayer]
+        let players = [audioPlayer, audioKetteiPlayer, audioCorrectPlayer,audioUnCorrectPlayer,audioAttackPlayer,audioMonsterAttackPlayer,audioCountdownPlayer,audioCancelPlayer,audioChangePlayer,audioReturnPlayer,audioDownPlayer,audioLevelUpPlayer,audioGameClearPlayer,audioGameOverPlayer,audioTreasurePlayer,audioCoinPlayer,audioTouchPlayer]
         for player in players {
             if let player = player {
                 if player.volume == 0 {
@@ -160,5 +172,17 @@ class AudioManager: ObservableObject {
     func playTittleSound() {
         audioTittlePlayer?.seek(to: CMTime.zero) // 再生位置を先頭に戻す
         audioTittlePlayer?.play()
+    }
+    func playTreasureSound() {
+        audioTreasurePlayer?.seek(to: CMTime.zero) // 再生位置を先頭に戻す
+        audioTreasurePlayer?.play()
+    }
+    func playCoinSound() {
+        audioCoinPlayer?.seek(to: CMTime.zero) // 再生位置を先頭に戻す
+        audioCoinPlayer?.play()
+    }
+    func playTouchSound() {
+        audioTouchPlayer?.seek(to: CMTime.zero) // 再生位置を先頭に戻す
+        audioTouchPlayer?.play()
     }
 }

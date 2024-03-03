@@ -7,9 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		18161F5B2B86DA76005F55DF /* RewardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18161F5A2B86DA76005F55DF /* RewardView.swift */; };
+		18161F612B87332C005F55DF /* コイン.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 18161F602B87332C005F55DF /* コイン.mp3 */; };
+		18161F632B875A8B005F55DF /* 撫でる.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 18161F622B875A8B005F55DF /* 撫でる.mp3 */; };
+		18161F692B875CE6005F55DF /* sound.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 18161F682B875CE6005F55DF /* sound.mp3 */; };
 		182F36E02B7F233D001394FB /* SignUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 182F36DF2B7F233D001394FB /* SignUp.swift */; };
 		182F36E22B7F24BC001394FB /* AuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 182F36E12B7F24BC001394FB /* AuthManager.swift */; };
-		187327432B7F9D2500668F3C /* AvatarTopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 187327422B7F9D2500668F3C /* AvatarTopView.swift */; };
+		1867D3B02B882BC30021ED5D /* ContactView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1867D3AF2B882BC30021ED5D /* ContactView.swift */; };
 		187327452B8046F600668F3C /* ChatHistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 187327442B8046F600668F3C /* ChatHistoryView.swift */; };
 		187327472B80627E00668F3C /* AvatarListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 187327462B80627E00668F3C /* AvatarListView.swift */; };
 		187327492B8062E500668F3C /* AudioManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 187327482B8062E500668F3C /* AudioManager.swift */; };
@@ -25,12 +29,25 @@
 		1873275E2B8063C600668F3C /* 不正解.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 187327532B8063C500668F3C /* 不正解.mp3 */; };
 		1873275F2B8063C600668F3C /* おとも切り替え.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 187327542B8063C500668F3C /* おとも切り替え.mp3 */; };
 		187327612B8065B100668F3C /* AVKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 187327602B8065B100668F3C /* AVKit.framework */; };
-		1896FEF72B80AC0E00A5977F /* BackGroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1896FEF62B80AC0E00A5977F /* BackGroundView.swift */; };
 		1896FEF92B80CBCA00A5977F /* TopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1896FEF82B80CBCA00A5977F /* TopView.swift */; };
 		1896FEFB2B80CC8E00A5977F /* SettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1896FEFA2B80CC8E00A5977F /* SettingView.swift */; };
 		1896FEFE2B80CCF800A5977F /* TermsOfServiceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1896FEFC2B80CCF800A5977F /* TermsOfServiceView.swift */; };
 		1896FEFF2B80CCF800A5977F /* PrivacyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1896FEFD2B80CCF800A5977F /* PrivacyView.swift */; };
 		1896FF012B81B37C00A5977F /* ManagerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1896FF002B81B37C00A5977F /* ManagerView.swift */; };
+		1896FF052B81C5DD00A5977F /* TreasureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1896FF042B81C5DD00A5977F /* TreasureView.swift */; };
+		189A59242B838F5B000BA1DA /* ModalTreasureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 189A59232B838F5B000BA1DA /* ModalTreasureView.swift */; };
+		189A59262B83B3E2000BA1DA /* お宝を入手.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 189A59252B83B3E2000BA1DA /* お宝を入手.mp3 */; };
+		189A59282B841292000BA1DA /* ModalBackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 189A59272B841292000BA1DA /* ModalBackgroundView.swift */; };
+		189A592A2B84472C000BA1DA /* CoinModalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 189A59292B84472C000BA1DA /* CoinModalView.swift */; };
+		189A592C2B844891000BA1DA /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 189A592B2B844891000BA1DA /* StoreKit.framework */; };
+		189A592F2B844BAF000BA1DA /* StoreKitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 189A592E2B844BAF000BA1DA /* StoreKitView.swift */; };
+		189A59312B84D398000BA1DA /* HelpModalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 189A59302B84D398000BA1DA /* HelpModalView.swift */; };
+		18CEB27C2B81D61200125173 /* TreasureListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18CEB27B2B81D61200125173 /* TreasureListView.swift */; };
+		18CEB27E2B81E5CC00125173 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18CEB27D2B81E5CC00125173 /* LoadingView.swift */; };
+		18CEB2802B82186E00125173 /* BackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18CEB27F2B82186E00125173 /* BackgroundView.swift */; };
+		18EA883A2B8B19AA00067FE7 /* NameUpdateModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18EA88392B8B19AA00067FE7 /* NameUpdateModal.swift */; };
+		18EA883C2B8B28B900067FE7 /* NameUpdateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18EA883B2B8B28B900067FE7 /* NameUpdateView.swift */; };
+		18EA88402B8C9D6800067FE7 /* Interstitial.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18EA883F2B8C9D6800067FE7 /* Interstitial.swift */; };
 		18EFB8492B7E4872008AC2B8 /* chatAiApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18EFB8482B7E4872008AC2B8 /* chatAiApp.swift */; };
 		18EFB84B2B7E4872008AC2B8 /* ChatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18EFB84A2B7E4872008AC2B8 /* ChatView.swift */; };
 		18EFB84D2B7E4874008AC2B8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 18EFB84C2B7E4874008AC2B8 /* Assets.xcassets */; };
@@ -42,6 +59,8 @@
 		18EFB8792B7F0909008AC2B8 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18EFB8782B7F0909008AC2B8 /* ContentView.swift */; };
 		18EFB87B2B7F122D008AC2B8 /* TestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18EFB87A2B7F122D008AC2B8 /* TestView.swift */; };
 		18EFB87D2B7F1948008AC2B8 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 18EFB87C2B7F1948008AC2B8 /* GoogleService-Info.plist */; };
+		18F4F9C52B89A9730084726E /* SubscriptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18F4F9C42B89A9730084726E /* SubscriptionView.swift */; };
+		18F4F9C82B89FB4C0084726E /* BannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18F4F9C72B89FB4C0084726E /* BannerView.swift */; };
 		3DB0DF1CB30271309C3BD9F7 /* Pods_chatAi.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F14DD4337C194C3B52927303 /* Pods_chatAi.framework */; };
 		881925688D59824B1892F3C7 /* Pods_chatAi_chatAiUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E0CD3B981536DA45C9B1085B /* Pods_chatAi_chatAiUITests.framework */; };
 		FE8B8B3F41B6FCCB1055BAC6 /* Pods_chatAiTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 330E0F950590C0D7AC44D119 /* Pods_chatAiTests.framework */; };
@@ -65,10 +84,14 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		18161F5A2B86DA76005F55DF /* RewardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RewardView.swift; sourceTree = "<group>"; };
+		18161F602B87332C005F55DF /* コイン.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "コイン.mp3"; path = "../../../Downloads/コイン.mp3"; sourceTree = "<group>"; };
+		18161F622B875A8B005F55DF /* 撫でる.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "撫でる.mp3"; path = "../../../Downloads/撫でる.mp3"; sourceTree = "<group>"; };
+		18161F682B875CE6005F55DF /* sound.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = sound.mp3; path = ../../../Downloads/sound.mp3; sourceTree = "<group>"; };
 		182F36DE2B7F2083001394FB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		182F36DF2B7F233D001394FB /* SignUp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUp.swift; sourceTree = "<group>"; };
 		182F36E12B7F24BC001394FB /* AuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthManager.swift; sourceTree = "<group>"; };
-		187327422B7F9D2500668F3C /* AvatarTopView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatarTopView.swift; sourceTree = "<group>"; };
+		1867D3AF2B882BC30021ED5D /* ContactView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactView.swift; sourceTree = "<group>"; };
 		187327442B8046F600668F3C /* ChatHistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatHistoryView.swift; sourceTree = "<group>"; };
 		187327462B80627E00668F3C /* AvatarListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatarListView.swift; sourceTree = "<group>"; };
 		187327482B8062E500668F3C /* AudioManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioManager.swift; sourceTree = "<group>"; };
@@ -84,12 +107,26 @@
 		187327532B8063C500668F3C /* 不正解.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "不正解.mp3"; path = "../../itQuiz 音声/不正解.mp3"; sourceTree = "<group>"; };
 		187327542B8063C500668F3C /* おとも切り替え.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "おとも切り替え.mp3"; path = "../../itQuiz 音声/おとも切り替え.mp3"; sourceTree = "<group>"; };
 		187327602B8065B100668F3C /* AVKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS17.2.sdk/System/Library/Frameworks/AVKit.framework; sourceTree = DEVELOPER_DIR; };
-		1896FEF62B80AC0E00A5977F /* BackGroundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackGroundView.swift; sourceTree = "<group>"; };
 		1896FEF82B80CBCA00A5977F /* TopView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopView.swift; sourceTree = "<group>"; };
 		1896FEFA2B80CC8E00A5977F /* SettingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SettingView.swift; path = "../../名称未設定フォルダ 2/SettingView.swift"; sourceTree = "<group>"; };
 		1896FEFC2B80CCF800A5977F /* TermsOfServiceView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TermsOfServiceView.swift; path = "../../名称未設定フォルダ/TermsOfServiceView.swift"; sourceTree = "<group>"; };
 		1896FEFD2B80CCF800A5977F /* PrivacyView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PrivacyView.swift; path = "../../名称未設定フォルダ/PrivacyView.swift"; sourceTree = "<group>"; };
 		1896FF002B81B37C00A5977F /* ManagerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagerView.swift; sourceTree = "<group>"; };
+		1896FF042B81C5DD00A5977F /* TreasureView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TreasureView.swift; sourceTree = "<group>"; };
+		189A59232B838F5B000BA1DA /* ModalTreasureView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModalTreasureView.swift; sourceTree = "<group>"; };
+		189A59252B83B3E2000BA1DA /* お宝を入手.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "お宝を入手.mp3"; path = "../../../Downloads/お宝を入手.mp3"; sourceTree = "<group>"; };
+		189A59272B841292000BA1DA /* ModalBackgroundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModalBackgroundView.swift; sourceTree = "<group>"; };
+		189A59292B84472C000BA1DA /* CoinModalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinModalView.swift; sourceTree = "<group>"; };
+		189A592B2B844891000BA1DA /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
+		189A592D2B8448DC000BA1DA /* Coin.storekit */ = {isa = PBXFileReference; lastKnownFileType = text; path = Coin.storekit; sourceTree = "<group>"; };
+		189A592E2B844BAF000BA1DA /* StoreKitView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreKitView.swift; sourceTree = "<group>"; };
+		189A59302B84D398000BA1DA /* HelpModalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpModalView.swift; sourceTree = "<group>"; };
+		18CEB27B2B81D61200125173 /* TreasureListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TreasureListView.swift; sourceTree = "<group>"; };
+		18CEB27D2B81E5CC00125173 /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
+		18CEB27F2B82186E00125173 /* BackgroundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundView.swift; sourceTree = "<group>"; };
+		18EA88392B8B19AA00067FE7 /* NameUpdateModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NameUpdateModal.swift; sourceTree = "<group>"; };
+		18EA883B2B8B28B900067FE7 /* NameUpdateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NameUpdateView.swift; sourceTree = "<group>"; };
+		18EA883F2B8C9D6800067FE7 /* Interstitial.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Interstitial.swift; sourceTree = "<group>"; };
 		18EFB8452B7E4872008AC2B8 /* chatAi.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = chatAi.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		18EFB8482B7E4872008AC2B8 /* chatAiApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = chatAiApp.swift; sourceTree = "<group>"; };
 		18EFB84A2B7E4872008AC2B8 /* ChatView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatView.swift; sourceTree = "<group>"; };
@@ -104,6 +141,8 @@
 		18EFB8782B7F0909008AC2B8 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		18EFB87A2B7F122D008AC2B8 /* TestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestView.swift; sourceTree = "<group>"; };
 		18EFB87C2B7F1948008AC2B8 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../GoogleService-Info.plist"; sourceTree = "<group>"; };
+		18F4F9C42B89A9730084726E /* SubscriptionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionView.swift; sourceTree = "<group>"; };
+		18F4F9C72B89FB4C0084726E /* BannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BannerView.swift; sourceTree = "<group>"; };
 		330E0F950590C0D7AC44D119 /* Pods_chatAiTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_chatAiTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3CF5E7D517892D3778187AF9 /* Pods-chatAi-chatAiUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-chatAi-chatAiUITests.release.xcconfig"; path = "Target Support Files/Pods-chatAi-chatAiUITests/Pods-chatAi-chatAiUITests.release.xcconfig"; sourceTree = "<group>"; };
 		9E345E4FA9126922AF5310ED /* Pods-chatAiTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-chatAiTests.release.xcconfig"; path = "Target Support Files/Pods-chatAiTests/Pods-chatAiTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -123,6 +162,7 @@
 				3DB0DF1CB30271309C3BD9F7 /* Pods_chatAi.framework in Frameworks */,
 				18EFB8772B7E62AE008AC2B8 /* OpenAIKit in Frameworks */,
 				187327612B8065B100668F3C /* AVKit.framework in Frameworks */,
+				189A592C2B844891000BA1DA /* StoreKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -148,6 +188,7 @@
 		18EFB83C2B7E4872008AC2B8 = {
 			isa = PBXGroup;
 			children = (
+				189A592D2B8448DC000BA1DA /* Coin.storekit */,
 				18EFB8472B7E4872008AC2B8 /* chatAi */,
 				18EFB8592B7E4874008AC2B8 /* chatAiTests */,
 				18EFB8632B7E4874008AC2B8 /* chatAiUITests */,
@@ -172,26 +213,44 @@
 			children = (
 				182F36DE2B7F2083001394FB /* Info.plist */,
 				18EFB8482B7E4872008AC2B8 /* chatAiApp.swift */,
+				18CEB27D2B81E5CC00125173 /* LoadingView.swift */,
 				18EFB84A2B7E4872008AC2B8 /* ChatView.swift */,
 				1896FEF82B80CBCA00A5977F /* TopView.swift */,
 				187327442B8046F600668F3C /* ChatHistoryView.swift */,
+				18EA883F2B8C9D6800067FE7 /* Interstitial.swift */,
+				18F4F9C72B89FB4C0084726E /* BannerView.swift */,
 				18EFB87A2B7F122D008AC2B8 /* TestView.swift */,
 				18EFB8782B7F0909008AC2B8 /* ContentView.swift */,
-				1896FEF62B80AC0E00A5977F /* BackGroundView.swift */,
+				18161F5A2B86DA76005F55DF /* RewardView.swift */,
+				189A59292B84472C000BA1DA /* CoinModalView.swift */,
+				189A59302B84D398000BA1DA /* HelpModalView.swift */,
+				18EA88392B8B19AA00067FE7 /* NameUpdateModal.swift */,
+				18EA883B2B8B28B900067FE7 /* NameUpdateView.swift */,
+				1867D3AF2B882BC30021ED5D /* ContactView.swift */,
+				189A592E2B844BAF000BA1DA /* StoreKitView.swift */,
+				1896FF042B81C5DD00A5977F /* TreasureView.swift */,
+				189A59232B838F5B000BA1DA /* ModalTreasureView.swift */,
+				189A59272B841292000BA1DA /* ModalBackgroundView.swift */,
+				18CEB27B2B81D61200125173 /* TreasureListView.swift */,
 				187327462B80627E00668F3C /* AvatarListView.swift */,
+				18F4F9C42B89A9730084726E /* SubscriptionView.swift */,
+				18CEB27F2B82186E00125173 /* BackgroundView.swift */,
 				1896FF002B81B37C00A5977F /* ManagerView.swift */,
 				187327482B8062E500668F3C /* AudioManager.swift */,
-				187327422B7F9D2500668F3C /* AvatarTopView.swift */,
 				182F36DF2B7F233D001394FB /* SignUp.swift */,
 				1896FEFA2B80CC8E00A5977F /* SettingView.swift */,
 				1896FEFD2B80CCF800A5977F /* PrivacyView.swift */,
 				1896FEFC2B80CCF800A5977F /* TermsOfServiceView.swift */,
 				182F36E12B7F24BC001394FB /* AuthManager.swift */,
 				187327542B8063C500668F3C /* おとも切り替え.mp3 */,
+				18161F622B875A8B005F55DF /* 撫でる.mp3 */,
 				1873274B2B8063C500668F3C /* カウントダウン.mp3 */,
 				1873274C2B8063C500668F3C /* ガチャる.mp3 */,
 				1873274E2B8063C500668F3C /* キャンセル.mp3 */,
 				1873274D2B8063C500668F3C /* ホームに戻る.mp3 */,
+				18161F682B875CE6005F55DF /* sound.mp3 */,
+				18161F602B87332C005F55DF /* コイン.mp3 */,
+				189A59252B83B3E2000BA1DA /* お宝を入手.mp3 */,
 				1873274A2B8063C500668F3C /* レベルアップ回復.mp3 */,
 				187327522B8063C500668F3C /* 正解.mp3 */,
 				1873274F2B8063C500668F3C /* 敵攻撃.mp3 */,
@@ -234,6 +293,7 @@
 		3969DE3C206019AB2440C167 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				189A592B2B844891000BA1DA /* StoreKit.framework */,
 				187327602B8065B100668F3C /* AVKit.framework */,
 				F14DD4337C194C3B52927303 /* Pods_chatAi.framework */,
 				E0CD3B981536DA45C9B1085B /* Pods_chatAi_chatAiUITests.framework */,
@@ -373,8 +433,12 @@
 				187327592B8063C600668F3C /* キャンセル.mp3 in Resources */,
 				1873275F2B8063C600668F3C /* おとも切り替え.mp3 in Resources */,
 				187327562B8063C600668F3C /* カウントダウン.mp3 in Resources */,
+				189A59262B83B3E2000BA1DA /* お宝を入手.mp3 in Resources */,
 				18EFB8512B7E4874008AC2B8 /* Preview Assets.xcassets in Resources */,
+				18161F612B87332C005F55DF /* コイン.mp3 in Resources */,
+				18161F692B875CE6005F55DF /* sound.mp3 in Resources */,
 				1873275A2B8063C600668F3C /* 敵攻撃.mp3 in Resources */,
+				18161F632B875A8B005F55DF /* 撫でる.mp3 in Resources */,
 				187327582B8063C600668F3C /* ホームに戻る.mp3 in Resources */,
 				1873275E2B8063C600668F3C /* 不正解.mp3 in Resources */,
 				187327572B8063C600668F3C /* ガチャる.mp3 in Resources */,
@@ -511,22 +575,36 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				189A59282B841292000BA1DA /* ModalBackgroundView.swift in Sources */,
+				189A592A2B84472C000BA1DA /* CoinModalView.swift in Sources */,
+				18CEB2802B82186E00125173 /* BackgroundView.swift in Sources */,
+				1867D3B02B882BC30021ED5D /* ContactView.swift in Sources */,
 				18EFB87B2B7F122D008AC2B8 /* TestView.swift in Sources */,
+				18F4F9C52B89A9730084726E /* SubscriptionView.swift in Sources */,
+				18F4F9C82B89FB4C0084726E /* BannerView.swift in Sources */,
+				1896FF052B81C5DD00A5977F /* TreasureView.swift in Sources */,
 				182F36E22B7F24BC001394FB /* AuthManager.swift in Sources */,
 				1896FF012B81B37C00A5977F /* ManagerView.swift in Sources */,
-				187327432B7F9D2500668F3C /* AvatarTopView.swift in Sources */,
+				189A592F2B844BAF000BA1DA /* StoreKitView.swift in Sources */,
+				18EA88402B8C9D6800067FE7 /* Interstitial.swift in Sources */,
 				18EFB84B2B7E4872008AC2B8 /* ChatView.swift in Sources */,
+				189A59312B84D398000BA1DA /* HelpModalView.swift in Sources */,
 				18EFB8492B7E4872008AC2B8 /* chatAiApp.swift in Sources */,
 				1896FEFE2B80CCF800A5977F /* TermsOfServiceView.swift in Sources */,
 				187327472B80627E00668F3C /* AvatarListView.swift in Sources */,
+				18CEB27C2B81D61200125173 /* TreasureListView.swift in Sources */,
+				18EA883A2B8B19AA00067FE7 /* NameUpdateModal.swift in Sources */,
 				187327452B8046F600668F3C /* ChatHistoryView.swift in Sources */,
 				18EFB8792B7F0909008AC2B8 /* ContentView.swift in Sources */,
 				1896FEFB2B80CC8E00A5977F /* SettingView.swift in Sources */,
-				1896FEF72B80AC0E00A5977F /* BackGroundView.swift in Sources */,
+				189A59242B838F5B000BA1DA /* ModalTreasureView.swift in Sources */,
 				187327492B8062E500668F3C /* AudioManager.swift in Sources */,
+				18161F5B2B86DA76005F55DF /* RewardView.swift in Sources */,
 				1896FEF92B80CBCA00A5977F /* TopView.swift in Sources */,
 				182F36E02B7F233D001394FB /* SignUp.swift in Sources */,
+				18CEB27E2B81E5CC00125173 /* LoadingView.swift in Sources */,
 				1896FEFF2B80CCF800A5977F /* PrivacyView.swift in Sources */,
+				18EA883C2B8B28B900067FE7 /* NameUpdateView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -685,7 +763,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = chatAi/chatAi.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 1.4;
 				DEVELOPMENT_ASSET_PATHS = "\"chatAi/Preview Content\"";
 				DEVELOPMENT_TEAM = F3XS565TSX;
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -693,6 +771,7 @@
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = chatAi/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "チャットモ";
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
@@ -703,11 +782,11 @@
 				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphonesimulator*]" = UIStatusBarStyleDefault;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 13.6;
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.4;
 				PRODUCT_BUNDLE_IDENTIFIER = "Swift-Beginners-app.chatAi";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = auto;
@@ -726,7 +805,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = chatAi/chatAi.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 1.4;
 				DEVELOPMENT_ASSET_PATHS = "\"chatAi/Preview Content\"";
 				DEVELOPMENT_TEAM = F3XS565TSX;
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -734,6 +813,7 @@
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = chatAi/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "チャットモ";
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
@@ -744,11 +824,11 @@
 				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphonesimulator*]" = UIStatusBarStyleDefault;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 13.6;
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.4;
 				PRODUCT_BUNDLE_IDENTIFIER = "Swift-Beginners-app.chatAi";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = auto;

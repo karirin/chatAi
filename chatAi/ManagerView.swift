@@ -60,12 +60,11 @@ struct ManagerView: View {
             
             TabView(selection: $selectedTab,
                     content: {
-                AvatarListView(isPresenting: .constant(false))
-                //                            .padding(.top)
+                AvatarListView()
                     .tag(0)
-                BackGroundView(isPresenting: .constant(false))
+                TreasureListView()
                     .tag(1)
-                BackGroundView(isPresenting: .constant(false))
+                BackgroundView()
                     .tag(2)
             })
             .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))

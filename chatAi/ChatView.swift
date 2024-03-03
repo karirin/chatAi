@@ -13,12 +13,14 @@ struct Chat: View {
     // ユーザーが入力するテキストを保存する変数
     @State private var text: String = ""
     @ObservedObject var authManager = AuthManager.shared
+    @ObservedObject var audioManager:AudioManager
+    @State private var nameModalFlag = false
     // チャットメッセージの配列
     @State private var chat: [ChatMessage] = [
-//        ChatMessage(role: .system, content: "あなたは、ユーザーの質問や会話に回答するロボットです。"),
-//        ChatMessage(role: .system, content:"こんにちは。何かお困りのことがあればおっしゃってください。")
+        ChatMessage(role: .system, content: "あなたは、ユーザーの質問や会話に回答するロボットです。"),
+        ChatMessage(role: .system, content:"こんにちは。何かお困りのことがあればおっしゃってください。"),
         ChatMessage(role: .system, content: "こちらではAIアシスタントのだっちゃんが会話を行います。だっちゃんは語尾に必ずだっちゃを付けます。可愛くて愛情たっぷりな表現をするのが得意です。"),
-        ChatMessage(role: .assistant, content: "私の名前はだっちゃんだっちゃ。はじめてですが、愛に溢れているのでお裾分けしてあげるだっちゃ。よろしくだっちゃ"),
+//        ChatMessage(role: .assistant, content: "私の名前はだっちゃんだっちゃ。はじめてですが、愛に溢れているのでお裾分けしてあげるだっちゃ。よろしくだっちゃ"),
 //        ChatMessage(role: .user, content: "これからよろしくね！会話を楽しもう！")
     ]
     
@@ -31,7 +33,7 @@ struct Chat: View {
                     ForEach(chat.indices, id: \.self) { index in
                         // 最初のメッセージ以外を表示
                         if index > 1 {
-                            MessageView(message: chat[index])
+                            MessageView(message: chat[index],nameModalFlag: $nameModalFlag, audioManager: audioManager)
                         }
                     }
                 }
@@ -75,12 +77,9 @@ struct Chat: View {
                     Task {
                         do {
                             // OpenAIの設定
-                            let config = Configuration(
-                                organizationId: "org-dPUAuIy1CBxghho0gfTEk53n",
-                                apiKey: "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"
-                            )
+                           //ここ
                             let openAI = OpenAI(config)
-                            let chatParameters = ChatParameters(model: ChatModels(rawValue: "gpt-3.5-turbo")!, messages: chat)
+                            let chatParameters = ChatParameters(model: ChatModels(rawValue: "gpt-4")!, messages: chat)
                             
                             // チャットの生成
                             let chatCompletion = try await openAI.generateChatCompletion(
@@ -112,30 +111,75 @@ struct Chat: View {
 // メッセージのビュー
 struct MessageView: View {
     var message: ChatMessage
+    @State private var userName: String = ""
+    @State private var avatar: [[String: Any]] = []
+    @State private var userMoney: Int = 0
+    @State private var userLevel: Int = 0
+    @State private var userHp: Int = 100
+    @State private var userFlag: Int = 0
+    @State private var userAttack: Int = 20
+    @State private var tutorialNum: Int = 0
+    @Binding var nameModalFlag: Bool
+    @ObservedObject var authManager = AuthManager.shared
+    @ObservedObject var audioManager:AudioManager
     
     var body: some View {
-        HStack {
-            if message.role.rawValue == "user" {
-                Spacer()
-            } else {
-                // ユーザーでない場合はアバターを表示
-                AvatarView(imageName: "avatar")
-                    .padding(.trailing, 8)
+        ZStack{
+            HStack {
+                if message.role.rawValue == "user" {
+                    Spacer()
+                } else {
+                    // ユーザーでない場合はアバターを表示
+                    AvatarView(imageName: "avatar")
+                        .padding(.trailing, 8)
+                }
+                VStack(alignment: .leading, spacing: 4) {
+                    // メッセージのテキストを表示
+                    Text(message.content!)
+                        .font(.system(size: 14)) // フォントサイズを調整
+                        .foregroundColor(message.role.rawValue == "user" ? .black : .black)
+                        .padding(10)
+                    
+                        .background(message.role.rawValue == "user" ? Color("chatUserColor") : Color("chatColor"))
+                        .cornerRadius(20) // 角を丸くする
+                }
+                .padding(.vertical, 5)
+                // ユーザーのメッセージの場合は右側にスペースを追加
+                if message.role.rawValue == "user" {
+                    VStack{
+                        Image(systemName: "person.crop.circle")
+                            .resizable()
+                            .frame(width: 30, height: 30)
+                        Text(userName)
+                            .font(.caption)
+                            .foregroundColor(.black)
+                    }.padding(.top,5)
+                        .onTapGesture {
+                            nameModalFlag = true
+                        }
+                }
             }
-            VStack(alignment: .leading, spacing: 4) {
-                // メッセージのテキストを表示
-                Text(message.content!)
-                    .font(.system(size: 14)) // フォントサイズを調整
-                    .foregroundColor(message.role.rawValue == "user" ? .white : .black)
-                    .padding(10)
-                    // ユーザーとAIのメッセージで背景色を変更
-                    .background(message.role.rawValue == "user" ? Color(#colorLiteral(red: 0.2078431373, green: 0.7647058824, blue: 0.3450980392, alpha: 1)) : Color(#colorLiteral(red: 0.9098039216, green: 0.9098039216, blue: 0.9176470588, alpha: 1)))
-                    .cornerRadius(20) // 角を丸くする
+        }
+        .onChange(of: nameModalFlag) { _ in
+            authManager.fetchUserInfo { (name, avatar, money, hp, attack, tutorialNum, userFlag) in
+                self.userName = name ?? ""
+                self.avatar = avatar ?? [[String: Any]]()
+                self.userMoney = money ?? 0
+                self.userHp = hp ?? 100
+                self.userAttack = attack ?? 20
+                self.tutorialNum = tutorialNum ?? 0
+                self.userFlag = userFlag ?? 0
             }
-            .padding(.vertical, 5)
-            // ユーザーのメッセージの場合は右側にスペースを追加
-            if message.role.rawValue != "user" {
-                Spacer()
+        }
+        .onAppear{
+            authManager.fetchUserInfo { (name, avatar, money, hp, attack, tutorialNum, userFlag) in
+                self.userName = name ?? ""
+                self.avatar = avatar ?? [[String: Any]]()
+                self.userMoney = money ?? 0
+                self.userHp = hp ?? 100
+                self.userAttack = attack ?? 20
+                self.tutorialNum = tutorialNum ?? 0
+                self.userFlag = userFlag ?? 0
             }
         }
         .padding(.horizontal)
@@ -146,44 +190,94 @@ struct MessageView: View {
 
 struct MessageAvatarView: View {
     var message: ChatMessage
+    @ObservedObject var authManager = AuthManager.shared
+    @State var tutorialNum: Int
+    @Binding var tutorialStart: Bool
+    @State private var userName: String = ""
+    @State private var avatar: [[String: Any]] = []
+    @State private var userMoney: Int = 0
+    @State private var userFlag: Int = 0
+    @State private var userHp: Int = 100
+    @State private var userAttack: Int = 20
+    @State private var isLoading: Bool = true
+    @Binding var chatFlag: Bool
     
     var body: some View {
         HStack {
-            if message.role.rawValue == "user" {
+            if chatFlag == true {
+                Text("えへへ、撫でてくれてありがとう♪\n\(userName)ともっとお話ししたいな♪♪")
+                    .padding(10)
+                    .background(Color("chatColor"))
+                    .cornerRadius(20)
             } else {
-//                // ユーザーでない場合はアバターを表示
-//                AvatarView(imageName: "avatar")
-//                    .padding(.trailing, 8)
-            
-            VStack(alignment: .leading, spacing: 4) {
-                ZStack {
-                    Text(message.content!)
-//                    Text("あああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああ")
-                        .font(.system(size: 16))
-                        .foregroundColor(message.role.rawValue == "user" ? .white : .black)
-                        .padding(10)
-                        .background(message.role.rawValue == "user" ? Color(#colorLiteral(red: 0.2078431373, green: 0.7647058824, blue: 0.3450980392, alpha: 1)) : Color(#colorLiteral(red: 0.9098039216, green: 0.9098039216, blue: 0.9176470588, alpha: 1)))
-                        .cornerRadius(20)
-                        // しっぽの追加
-//                        .overlay(
-//                            BubbleTail(isUser: message.role.rawValue == "user")
-//                                .fill(message.role.rawValue == "user" ? Color(#colorLiteral(red: 0.2078431373, green: 0.7647058824, blue: 0.3450980392, alpha: 1)) : Color(#colorLiteral(red: 0.9098039216, green: 0.9098039216, blue: 0.9176470588, alpha: 1)))
-//                                .frame(width: 20, height: 30)
-//                                .offset(x: message.role.rawValue == "user" ? 50 : -50, y: 0), alignment: .bottom
-//                        )
+                //                Text("ss")
+                
+                if message.role.rawValue == "user" {
+                    if tutorialNum == 0 && tutorialStart {
+                        Text("はじめまして！\(self.userName)！\(authManager.usedAvatarName)だよ♪\n雑談、悩み、恋話、なんでも話してね♪♪")
+                            .padding(10)
+                            .background(Color("chatColor"))
+                            .cornerRadius(20)
+                    }
+                } else {
+                    VStack(alignment: .leading, spacing: 4) {
+                        Text(message.content!)
+//                        Text("ああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああ")
+                            .font(.system(size: fontSize(for: message.content!, isIPad: isIPad())))
+                            .foregroundColor(message.role.rawValue == "user" ? .black : .black)
+                            .padding(10)
+                            .background(message.role.rawValue == "user" ? Color("chatUserColor") : Color("chatColor"))
+                            .cornerRadius(20)
+                    }
+                    .padding(.vertical, 5)
+                    .padding(.top)
                 }
             }
-            .padding(.vertical, 5)
-
-            // ユーザーのメッセージの場合は右側にスペースを追加
-//            if message.role.rawValue != "user" {
-//                Spacer()
-//            }
+            }
+        .onAppear{
+            authManager.fetchUserInfo { (name, avatar, money, hp, attack, tutorialNum, userFlag) in
+                self.userName = name ?? ""
+                self.avatar = avatar ?? [[String: Any]]()
+                self.userMoney = money ?? 0
+                self.userHp = hp ?? 100
+                self.userAttack = attack ?? 20
+                self.tutorialNum = tutorialNum ?? 0
+                self.userFlag = userFlag ?? 0
+                self.isLoading = false
             }
         }
+        .onChange(of: message.content) { _ in
+                                print("message.content:\(message.content)")
+                            }
         .padding(.horizontal)
+        }
+        // テキストサイズを決定する関数
+        func fontSize(for text: String, isIPad: Bool) -> CGFloat {
+            let baseFontSize: CGFloat = isIPad ? 24 : 20 // iPad用のベースフォントサイズを大きくする
+
+            let englishAlphabet = CharacterSet(charactersIn: "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ")
+            let textCharacterSet = CharacterSet(charactersIn: text)
+
+            if englishAlphabet.isSuperset(of: textCharacterSet) {
+                return baseFontSize
+            } else {
+                if text.count >= 25 {
+                    return baseFontSize - 6
+                } else if text.count >= 21 {
+                    return baseFontSize - 6
+                } else if text.count >= 17 {
+                    return baseFontSize - 6
+                } else {
+                    return baseFontSize - 4
+                }
+            }
+        }
+    
+    func isIPad() -> Bool {
+        return UIDevice.current.userInterfaceIdiom == .pad
     }
-}
+    }
+
 
 // アバタービュー
 struct AvatarView: View {
@@ -195,30 +289,31 @@ struct AvatarView: View {
     @State private var userHp: Int = 100
     @State private var userAttack: Int = 20
     @State private var tutorialNum: Int = 0
+    @State private var userFlag: Int = 0
     @ObservedObject var authManager = AuthManager.shared
     
     var body: some View {
         VStack {
             // アバター画像を円形に表示
-            Image(avatar.isEmpty ? "defaultIcon" : (avatar.first?["name"] as? String) ?? "")
+            Image(avatar.isEmpty ? "" : (avatar.first?["name"] as? String) ?? "")
                 .resizable()
                 .frame(width: 30, height: 30)
                 .clipShape(Circle())
             
             // AIの名前を表示
-            Text(avatar.isEmpty ? "defaultIcon" : (avatar.first?["name"] as? String) ?? "")
+            Text(avatar.isEmpty ? "" : (avatar.first?["name"] as? String) ?? "")
                 .font(.caption) // フォントサイズを小さくするためのオプションです。
                 .foregroundColor(.black) // テキストの色を黒に設定します。
         }
         .onAppear{
-            authManager.fetchUserInfo { (name, avatar, level, money, hp, attack, tutorialNum) in
+            authManager.fetchUserInfo { (name, avatar, money, hp, attack, tutorialNum, userFlag) in
                 self.userName = name ?? ""
                 self.avatar = avatar ?? [[String: Any]]()
-                self.userLevel = level ?? 0
                 self.userMoney = money ?? 0
                 self.userHp = hp ?? 100
                 self.userAttack = attack ?? 20
                 self.tutorialNum = tutorialNum ?? 0
+                self.userFlag = userFlag ?? 0
             }
         }
     }
@@ -228,7 +323,8 @@ struct AvatarView: View {
 // プレビュー
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        Chat()
+//        Chat()
+        TopView()
     }
 }
 

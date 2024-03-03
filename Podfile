@@ -9,6 +9,7 @@ target 'chatAi' do
   pod 'Firebase/Storage'
   pod 'Firebase/Database'
   pod 'Google-Mobile-Ads-SDK'
+  pod 'Firebase/Messaging'
   pod 'Firebase/Analytics'
   # Pods for chatAi
 
